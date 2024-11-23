@@ -1,0 +1,61 @@
+1A
+
+#!/bin/bash
+
+i="y"
+while [ "$i" = "y" ]; do
+    
+    echo "Disk Space Usage Menu"
+    echo "1. Display Disk Space Usage"
+    echo "2. Display Total Space"
+    echo "3. Display Used Space"
+    echo "4. Display Available Space"
+    echo "5. Display Usage Percentage"
+    echo "6. Exit"
+    echo -n "Enter Your Choice: "
+    read choice
+
+    case $choice in
+        1)
+            echo "Displaying Disk Space Usage:"
+            df -h
+            ;;
+        
+        2)
+            echo "Displaying Total Space:"
+            df -h --total | grep 'total' | awk '{print "Total Space: " $2}'
+            ;;
+        
+        3)
+            echo "Displaying Disk Used Space:"
+            df -h --total | grep 'total' | awk '{print "Used Space: " $3}'
+            ;;
+        
+        4)
+            echo "Displaying Disk Available Space:"
+            df -h --total | grep 'total' | awk '{print "Available Space: " $4}'
+            ;;
+        
+        5)
+            echo "Displaying Disk Usage Percentage:"
+            df -h --total | grep 'total' | awk '{print "Usage Percentage: " $5}'
+            ;;
+        
+        6)
+            echo "Thanks For Exiting....!"
+            exit
+            ;;
+        
+        *)
+            echo "Invalid Choice"
+            ;;
+    esac
+
+    echo -n "Do you want to continue? (If Yes = y else No = n): "
+    read i
+    if [ "$i" != "y" ]
+     then
+        echo "Exiting..."
+        exit
+    fi
+done

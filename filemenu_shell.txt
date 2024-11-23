@@ -1,0 +1,70 @@
+1B
+
+#!/bin/bash
+
+i="y"
+while [ "$i" = "y" ]; do
+
+    echo "File and Directory Operations Menu"
+    echo "1. Display File Contents"
+    echo "2. Create a Directory"
+    echo "3. Remove a Directory"
+    echo "4. Create a File"
+    echo "5. Remove a File"
+    echo "6. Exit"
+    echo -n "Enter Your Choice: "
+    read choice
+
+    case $choice in
+        1)
+            echo -n "Enter file path: "
+            read file_path
+            echo "Displaying contents of file $file_path:"
+            cat "$file_path"
+            ;;
+        
+        2)
+            echo -n "Enter directory name to create: "
+            read dir_name
+            echo "Creating directory $dir_name:"
+            mkdir "$dir_name"
+            ;;
+        
+        3)
+            echo -n "Enter directory name to remove: "
+            read dir_name
+            echo "Removing directory $dir_name:"
+            rmdir "$dir_name"
+            ;;
+        
+        4)
+            echo -n "Enter file name to create: "
+            read file_name
+            echo "Creating file $file_name:"
+            touch "$file_name"
+            ;;
+        
+        5)
+            echo -n "Enter file name to remove: "
+            read file_name
+            echo "Removing file $file_name:"
+            rm "$file_name"
+            ;;
+        
+        6)
+            echo "Thanks For Exiting....!"
+            exit
+            ;;
+        
+        *)
+            echo "Invalid Choice"
+            ;;
+    esac
+
+    echo -n "Do you want to continue? (If Yes = y else No = n): "
+    read i
+    if [ "$i" != "y" ]; then
+        echo "Exiting..."
+        exit
+    fi
+done

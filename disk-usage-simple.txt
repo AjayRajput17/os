@@ -1,0 +1,46 @@
+#!/bin/bash
+
+while true; do
+    echo "-----------------------------"
+    echo "    Disk Space Menu"
+    echo "-----------------------------"
+    echo "1. Display total space"
+    echo "2. Display used space"
+    echo "3. Display available space"
+    echo "4. Display usage percentage"
+    echo "5. Display full disk usage of the file system"
+    echo "6. Exit"
+    echo "-----------------------------"
+    read -p "Enter your choice: " choice
+
+    case $choice in
+        1)
+            echo "Total space:"
+            df -h --output=size | awk 'NR==2'
+            ;;
+        2)
+            echo "Used space:"
+            df -h --output=used | awk 'NR==2'
+            ;;
+        3)
+            echo "Available space:"
+            df -h --output=avail | awk 'NR==2'
+            ;;
+        4)
+            echo "Usage percentage:"
+            df -h --output=pcent | awk 'NR==2'
+            ;;
+        5)
+            echo "Full disk usage of the file system:"
+            df -h
+            ;;
+        6)
+            echo "Exiting program. Goodbye!"
+            exit 0
+            ;;
+        *)
+            echo "Invalid choice. Please try again."
+            ;;
+    esac
+    echo
+done

@@ -1,0 +1,59 @@
+1C
+
+#!/bin/bash
+
+i="y"
+while [ "$i" = "y" ]; do
+    echo "File and Directory Permissions Menu"
+    echo "1. Check File/Directory Permissions"
+    echo "2. Set File/Directory Permissions"
+    echo "3. Change Ownership of File/Directory"
+    echo "4. Exit"
+    echo -n "Enter Your Choice: "
+    read choice
+
+    case $choice in
+        1)
+            echo -n "Enter file/directory path to check permissions: "
+            read path
+            echo "Permissions for $path:"
+            ls -ld "$path"
+            ;;
+
+        2)
+            echo -n "Enter file/directory path to set permissions: "
+            read path
+            echo -n "Enter permissions (e.g., 755 or rwxr-xr-x): "
+            read perms
+            chmod "$perms" "$path"
+            echo "Permissions for $path set to $perms."
+            ;;
+
+        3)
+            echo -n "Enter file/directory path to change ownership: "
+            read path
+            echo -n "Enter new owner (e.g., user): "
+            read owner
+            echo -n "Enter new group (e.g., group): "
+            read group
+            chown "$owner:$group" "$path"
+            echo "Ownership of $path changed to $owner:$group."
+            ;;
+
+        4)
+            echo "Thanks for using the script. Exiting..."
+            exit
+            ;;
+
+        *)
+            echo "Invalid Choice. Please enter a number between 1 and 4."
+            ;;
+    esac
+
+    echo -n "Do you want to continue? (If Yes = y else No = n): "
+    read i
+    if [ "$i" != "y" ]; then
+        echo "Exiting..."
+        exit
+    fi
+done
